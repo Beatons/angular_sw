@@ -1,10 +1,8 @@
 // import * as webpack from 'webpack';
 
-const customWepackConfig = {
+module.exports = {
   module: {
     rules: [
     ]
   }
 };
-
-export default customWepackConfig;
