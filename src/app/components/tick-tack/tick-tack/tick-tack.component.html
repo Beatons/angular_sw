@@ -1,13 +1,17 @@
-{{game$ | async | json}}
-
-<div
-  *ngIf="game$ | async as game"
-  class="tick-tack"
->
-  <div
-    *ngFor="let field of game.fields; let i = index"
-    (click)="update(i, game)"
-  >
-    {{ field }}
-  </div>
+<div>
+  {{game$ | async | json}}
 </div>
+
+<ng-container
+  *ngIf="game$ | async as game"
+>
+  <button (click)="reset(game)">reset :3</button>
+  <div class="tick-tack">
+    <div
+      *ngFor="let field of game.fields; let i = index"
+      (click)="update(i, game)"
+    >
+      {{ field }}
+    </div>
+  </div>
+</ng-container>
