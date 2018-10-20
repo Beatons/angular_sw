@@ -10,6 +10,7 @@ import { UpdatesNotificationComponent } from './components/updates-notification/
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { TickTackModule } from './components/tick-tack/tick-tack.module';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    TickTackModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
