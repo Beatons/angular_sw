@@ -1,1 +1,13 @@
-{{array | async | json}}
+{{game$ | async | json}}
+
+<div
+  *ngIf="game$ | async as game"
+  class="tick-tack"
+>
+  <div
+    *ngFor="let field of game.fields; let i = index"
+    (click)="update(i, game)"
+  >
+    {{ field }}
+  </div>
+</div>

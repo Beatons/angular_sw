@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore, Query } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Observable } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { update } from 'ramda';
+import { pluck } from 'rxjs/operators';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -9,9 +10,14 @@ import { Observable } from 'rxjs';
   templateUrl: './tick-tack.component.html',
   styleUrls: ['./tick-tack.component.scss'],
 })
-
 export class TickTackComponent implements OnInit {
-  array: Observable<any>;
+  readonly gameCollection =
+    this.afs.collection('games');
+
+  readonly game$ =
+    this.gameCollection.valueChanges().pipe(
+      pluck('0'),
+    );
 
   constructor(
     private afs: AngularFirestore,
@@ -20,9 +26,12 @@ export class TickTackComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.array = this.afs.collection(`games`, ref => {
-      const q: Query = ref;
-      return q;
-    }).valueChanges();
+  }
+
+  update(index: number, game: any) {
+    let { player, fields } = game;
+    fields = update(index, player, fields as any);
+    player = player === 'x' ? 'o' : 'x';
+    this.gameCollection.doc(game.key).update({ fields, player });
   }
 }

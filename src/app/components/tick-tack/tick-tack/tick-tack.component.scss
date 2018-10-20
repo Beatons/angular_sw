@@ -1,0 +1,11 @@
+
+.tick-tack {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 300px;
+  > div {
+    width: 100px;
+    height: 100px;
+    outline: 1px solid black;
+  }
+}
